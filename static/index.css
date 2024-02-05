@@ -1,0 +1,29 @@
+html, body {
+    background-image: url("svg/wave.svg");
+    background-color: #18191A;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+h1 {
+    color: #fff;
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+}
+
+.long-space {
+    white-space: pre;
+}
+
+pre {
+    color: white
+}

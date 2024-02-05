@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Generate ASCII Art</title>
+    <link href="static/index.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="static/images/favicon.ico" />
+</head>
+
+<body>
+    <div class="container">
+       
+            <h1>Generate ASCII Art</h1>
+            <textarea id="form" rows="20" cols="100">Enter Text Here!!</textarea>
+
+            <div class="container">
+                <button onclick="submitForm()">Generate</button> 
+
+                <select id="style">
+                    <option value="standard.txt">Standard</option>
+                    <option value="shadow.txt">Shadow</option>
+                    <option value="thinkertoy.txt">Thinker Toy</option>
+                </select>
+            </div>
+           
+            <pre id="ascii"></pre>
+     
+
+        <script>
+            async function submitForm() {
+                const form = document.getElementById("form");
+                const style = document.getElementById("style");
+                const ascii = document.getElementById("ascii");
+
+
+                const data = await fetch("/ascii-art", {
+                    method: "POST",
+                    body: JSON.stringify({
+                        text: form.value,
+                        style: style.value
+                    }),
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Server Error');
+                    }
+
+                    return response.text()
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+            
+                ascii.innerHTML = "Result:\n" + data;
+
+                console.log(data)
+            }
+        </script>
+    </div>
+</html>
